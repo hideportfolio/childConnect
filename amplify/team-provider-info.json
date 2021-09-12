@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-unisysinternship-dev-214353-authRole",
+      "UnauthRoleArn": "arn:aws:iam::500717356514:role/amplify-unisysinternship-dev-214353-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::500717356514:role/amplify-unisysinternship-dev-214353-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-unisysinternship-dev-214353-deployment",
+      "UnauthRoleName": "amplify-unisysinternship-dev-214353-unauthRole",
+      "StackName": "amplify-unisysinternship-dev-214353",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:500717356514:stack/amplify-unisysinternship-dev-214353/c7f3f5d0-0d7d-11ec-9fed-0a655c0254c1",
+      "AmplifyAppId": "dvoynp94qqe2h"
+    },
+    "categories": {
+      "auth": {
+        "unisysinternshipb360718c": {}
+      }
+    }
+  }
+}

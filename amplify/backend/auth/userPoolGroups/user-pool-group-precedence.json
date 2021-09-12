@@ -1,0 +1,10 @@
+[
+  {
+    "groupName": "Parents",
+    "precedence": 1
+  },
+  {
+    "groupName": "Teachers",
+    "precedence": 2
+  }
+]

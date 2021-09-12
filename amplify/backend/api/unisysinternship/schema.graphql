@@ -1,0 +1,17 @@
+type User @model (
+    mutations: {create: null, delete: null, update: "updateUser"}
+    timestamps: null
+    subscriptions: null
+  )
+  @auth(rules: [
+    { allow: owner, ownerField: "id", provider: userPools, operations:[read, update] },
+    { allow: private, provider: userPools, operations:[read] }
+  ])
+{
+  id: ID!
+  firstname: String!
+  lastname: String!
+  type: UserType!
+}
+
+enum UserType { TEACHER PARENT }
