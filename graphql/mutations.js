@@ -14,3 +14,31 @@ export const updateUser = /* GraphQL */ `
     }
   }
 `;
+export const createAttendance = /* GraphQL */ `
+  mutation CreateAttendance(
+    $input: CreateAttendanceInput!
+    $condition: ModelAttendanceConditionInput
+  ) {
+    createAttendance(input: $input, condition: $condition) {
+      school
+      userId
+      date
+      attendance
+      timestamp
+    }
+  }
+`;
+export const updateAttendance = /* GraphQL */ `
+  mutation UpdateAttendance(
+    $input: UpdateAttendanceInput!
+    $condition: ModelAttendanceConditionInput
+  ) {
+    updateAttendance(input: $input, condition: $condition) {
+      school
+      userId
+      date
+      attendance
+      timestamp
+    }
+  }
+`;

@@ -28,3 +28,42 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
+export const getAttendance = /* GraphQL */ `
+  query GetAttendance($userId: ID!, $date: String!) {
+    getAttendance(userId: $userId, date: $date) {
+      school
+      userId
+      date
+      attendance
+      timestamp
+    }
+  }
+`;
+export const listAttendaces = /* GraphQL */ `
+  query ListAttendaces(
+    $userId: ID
+    $date: ModelStringKeyConditionInput
+    $filter: ModelAttendanceFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listAttendaces(
+      userId: $userId
+      date: $date
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        school
+        userId
+        date
+        attendance
+        timestamp
+      }
+      nextToken
+    }
+  }
+`;
