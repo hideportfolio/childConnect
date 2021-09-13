@@ -29,7 +29,7 @@ export default {
       const id = auth.username + now.getFullYear() + (now.getMonth() + 1) + now.getDate()
       const res = await API.graphql(graphqlOperation(createAttendance, {
         input: {
-          school: 'school',
+          schoolId: 'school',
           id,
           userId: auth.username,
           date,
