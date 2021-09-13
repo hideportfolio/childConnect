@@ -102,8 +102,40 @@ export const listThreads = /* GraphQL */ `
     }
   }
 `;
-export const threadByAttendance = /* GraphQL */ `
-  query ThreadByAttendance(
+export const attendancesByDate = /* GraphQL */ `
+  query AttendancesByDate(
+    $schoolId: ID
+    $date: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelAttendanceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    AttendancesByDate(
+      schoolId: $schoolId
+      date: $date
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        schoolId
+        id
+        userId
+        date
+        attendance
+        timestamp
+        threads {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const threadsByAttendance = /* GraphQL */ `
+  query ThreadsByAttendance(
     $attendanceId: ID
     $id: ModelIDKeyConditionInput
     $sortDirection: ModelSortDirection
@@ -111,7 +143,7 @@ export const threadByAttendance = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    ThreadByAttendance(
+    ThreadsByAttendance(
       attendanceId: $attendanceId
       id: $id
       sortDirection: $sortDirection
