@@ -19,6 +19,46 @@
 
 </template>
 
+<script>
+import Auth from '@aws-amplify/auth'
+import API, { graphqlOperation } from '@aws-amplify/api'
+import { createAttendance } from '~/graphql/mutations'
+
+export default {
+  layout: 'default',
+  middleware: 'auth',
+  data () {
+    return {
+      attendance: 'ATTEND',
+      attendanceType: [
+        'ATTEND',
+        'ABUSENT'
+      ],
+      date: ''
+    }
+  },
+  methods: {
+    async postAttendace () {
+      const auth = await Auth.currentUserInfo()
+      const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000)) // Timezone Tokyo
+      const date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+      const id = auth.username + now.getFullYear() + (now.getMonth() + 1) + now.getDate()
+      const res = await API.graphql(graphqlOperation(createAttendance, {
+        input: {
+          schoolId: 'school',
+          id,
+          userId: auth.username,
+          date,
+          attendance: this.attendance,
+          timestamp: Math.floor(Date.now() / 1000)
+        }
+      }))
+      console.log(res)
+    }
+  }
+}
+</script>
+
 <style>
 .a {
   width: 100%;
@@ -127,47 +167,21 @@ input[type=radio]:checked + label.absence {
 }
 
 .submit {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  color: #825959;
   margin: 20px auto;
+
+  width: 256px;
+  height: 52px;
+
+  background: #FFFFFF;
+  border: 1px solid #825959;
+  box-sizing: border-box;
+  border-radius: 50px;
 }
 
 </style>
-
-<script>
-import Auth from '@aws-amplify/auth'
-import API, { graphqlOperation } from '@aws-amplify/api'
-import { createAttendance } from '~/graphql/mutations'
-
-export default {
-  layout: 'default',
-  middleware: 'auth',
-  data () {
-    return {
-      attendance: 'ATTEND',
-      attendanceType: [
-        'ATTEND',
-        'ABUSENT'
-      ],
-      date: ''
-    }
-  },
-  methods: {
-    async postAttendace () {
-      const auth = await Auth.currentUserInfo()
-      const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000)) // Timezone Tokyo
-      // const date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
-      this.date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
-      const date = this.date
-      const res = await API.graphql(graphqlOperation(createAttendance, {
-        input: {
-          school: 'school',
-          userId: auth.username,
-          date,
-          attendance: this.attendance,
-          timestamp: Math.floor(Date.now() / 1000)
-        }
-      }))
-      console.log(res)
-    }
-  }
-}
-</script>
