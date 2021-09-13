@@ -1,26 +1,46 @@
 <template>
   <div>
+    <header>
+      <div class="headerContents">出席管理システム</div>
+    </header>
     <Nuxt />
   </div>
 </template>
 <style>
-    body{
-        background-color: #A1CAE2;
-    }
-    h1{
-        width: 100%;
-        font-size: 24px;
-        color: #FFFFFF;
-        background-color: #A1CAE2;
-        border-radius: 5px;
-        padding: 8px;
-        margin-bottom: 5px;
-    }
+  body{
+    background-color: #A1CAE2;
+    padding-top: 80px;
+  }
+  header{
+    height: 60px;
+    width: 100%;
+    background-color: #FFFFFF;
+    position: fixed;
+    top: 0;
+    padding: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    z-index: 999;
+  }
+  .headerContents{
+    color: #825959;
+    max-width: 800px;
+    font-size: 20px;
+    margin: 0 auto;
+  }
+  h1{
+    width: 100%;
+    font-size: 24px;
+    color: #FFFFFF;
+    background-color: #A1CAE2;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 5px;
+  }
   .card{
-        margin: 20px auto;
-        background-color: #FFFFFF;
-        max-width: 800px;
-        padding: 10px;
+    max-width: 800px;
+    background-color: #FFFFFF;
+    margin: 20px auto;
+    padding: 20px 10px 30px 10px;
   }
   .submit{
     background-color: #FFFFFF;
