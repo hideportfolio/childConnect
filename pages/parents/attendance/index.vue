@@ -14,7 +14,11 @@ export default {
   middleware: 'auth',
   data () {
     return {
-      attendace: 'ATTEND'
+      attendance: 'ATTEND',
+      attendanceType: [
+        'ATTEND',
+        'ABUSENT'
+      ]
     }
   },
   methods: {
@@ -27,7 +31,7 @@ export default {
           school: 'school',
           userId: auth.username,
           date,
-          attendance: this.attendace,
+          attendance: this.attendance,
           timestamp: Math.floor(Date.now() / 1000)
         }
       }))
