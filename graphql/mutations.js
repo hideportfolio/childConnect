@@ -20,11 +20,21 @@ export const createAttendance = /* GraphQL */ `
     $condition: ModelAttendanceConditionInput
   ) {
     createAttendance(input: $input, condition: $condition) {
-      school
+      schoolId
+      id
       userId
       date
       attendance
       timestamp
+      threads {
+        items {
+          id
+          attendanceId
+          userId
+          contents
+        }
+        nextToken
+      }
     }
   }
 `;
@@ -34,11 +44,40 @@ export const updateAttendance = /* GraphQL */ `
     $condition: ModelAttendanceConditionInput
   ) {
     updateAttendance(input: $input, condition: $condition) {
-      school
+      schoolId
+      id
       userId
       date
       attendance
       timestamp
+      threads {
+        items {
+          id
+          attendanceId
+          userId
+          contents
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const createThread = /* GraphQL */ `
+  mutation CreateThread(
+    $input: CreateThreadInput!
+    $condition: ModelThreadConditionInput
+  ) {
+    createThread(input: $input, condition: $condition) {
+      id
+      attendanceId
+      userId
+      user {
+        id
+        firstname
+        lastname
+        type
+      }
+      contents
     }
   }
 `;
