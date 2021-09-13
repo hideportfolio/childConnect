@@ -24,6 +24,7 @@ type Attendance @model (
     { allow: private, provider: userPools, operations:[create, update, read] }
   ])
   @key(fields: ["id"])
+  @key(name: "date-index", fields: ["schoolId", "date"], queryField: "AttendancesByDate")
 {
   schoolId: ID!
   id: ID!
@@ -43,7 +44,7 @@ type Thread @model (
   @auth(rules: [
     { allow: private, provider: userPools, operations:[create, read] }
   ])
-  @key(name: "attendance-index", fields: ["attendanceId", "id"], queryField: "ThreadByAttendance")
+  @key(name: "attendance-index", fields: ["attendanceId", "id"], queryField: "ThreadsByAttendance")
 {
   id: ID
   attendanceId: ID!
