@@ -14,4 +14,23 @@ type User @model (
   type: UserType!
 }
 
+type Attendance @model (
+    queries: {list: "listAttendaces", get: "getAttendance"}
+    mutations: {create: "createAttendance", delete: null, update: "updateAttendance"}
+    timestamps: null
+    subscriptions: null
+  )
+  @auth(rules: [
+    { allow: private, provider: userPools, operations:[create, update, read] }
+  ])
+  @key(fields: ["userId", "date"])
+{
+  school: ID!
+  userId: ID!
+  date: String!
+  attendance: AttendanceType!
+  timestamp: Int!
+}
+
 enum UserType { TEACHER PARENT }
+enum AttendanceType { ATTEND ABSENT }
