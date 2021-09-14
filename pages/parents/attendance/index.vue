@@ -11,8 +11,10 @@
         <label for="absence" class="absence">欠席</label>
       </p>
       <p>
-        <label class="">メッセージ</label>
-        <input type="text" placeholder="欠席理由">
+        <div class="text">
+          <label for="text" class="text-label">メッセージ（任意）</label>
+        </div>
+        <textarea name="text" rows="5" cols="10" v-model="text">ここに記入してください</textarea>
       </p>
 
       <div class="submit-box">
@@ -36,7 +38,8 @@ export default {
         'ATTEND',
         'ABSENT'
       ],
-      date: ''
+      date: '',
+      text: ''
     }
   },
   methods: {
@@ -88,6 +91,7 @@ h1 {
 p {
   display:flex;
   justify-content:center;
+  margin-bottom: 5px;
 }
 
 .date {
@@ -102,7 +106,7 @@ p {
   width: 100px;
   height: 21px;
 
-  margin: 20px auto;
+  margin: 15px auto 5px;
 }
 
 input[type=radio]{
@@ -160,6 +164,21 @@ input[type=radio]:checked + label.absence {
   background-color: #FF7676;
 }
 
+.text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+
+  color: #825959;
+  margin: 0 auto;
+  width: 251px;
+}
+.text-label {
+  margin-bottom: 1px;
+}
+
 .submit-box {
   display:flex;
   justify-content:center;
@@ -177,4 +196,14 @@ input[type=radio]:checked + label.absence {
   border: 1px solid #825959;
 }
 
+textarea {
+  width: 251px;
+  height: 83px;
+  background: #FFFFFF;
+  border: 1px solid #825959;
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin: 0 auto;
+  resize: none;
+}
 </style>
