@@ -22,7 +22,7 @@
 <script>
 import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
-import { createAttendance } from '~/graphql/mutations'
+import { createAttendance, createThread } from '~/graphql/mutations'
 export default {
   layout: 'default',
   middleware: 'auth',
@@ -36,12 +36,18 @@ export default {
       date: ''
     }
   },
+  computed: {
+    todayData () {
+      const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000))
+      return (now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate())
+    }
+  },
   methods: {
     async postAttendace () {
       const auth = await Auth.currentUserInfo()
       const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000)) // Timezone Tokyo
       const date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
-      const res = await API.graphql(graphqlOperation(createAttendance, {
+      const attendanceRes = await API.graphql(graphqlOperation(createAttendance, {
         input: {
           schoolId: 'school',
           userId: auth.username,
@@ -50,13 +56,14 @@ export default {
           timestamp: Math.floor(Date.now() / 1000)
         }
       }))
-      console.log(res)
-    }
-  },
-  computed: {
-    todayData () {
-      const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000))
-      return (now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate())
+      const remarksRes = await API.graphql(graphqlOperation(createThread, {
+        input: {
+          attendanceId: attendanceRes.data.createAttendance.id,
+          userId: auth.username,
+          contents: 'test message'
+        }
+      }))
+      console.log(remarksRes)
     }
   }
 }
