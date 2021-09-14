@@ -21,7 +21,9 @@
 <script>
 import API, { graphqlOperation } from '@aws-amplify/api'
 import { attendancesByDate } from '~/graphql/queries'
+
 export default {
+  middleware: 'auth',
   data () {
     return {
       attendances: [],

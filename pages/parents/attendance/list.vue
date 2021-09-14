@@ -11,6 +11,7 @@ import API, { graphqlOperation } from '@aws-amplify/api'
 import { listAttendaces } from '~/graphql/queries'
 
 export default {
+  middleware: 'auth',
   data () {
     return {
       attendances: []

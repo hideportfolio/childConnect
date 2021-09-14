@@ -14,6 +14,7 @@ import { getAttendance } from '~/graphql/queries'
 import { createThread } from '~/graphql/mutations'
 
 export default {
+  middleware: 'auth',
   data () {
     return {
       attendance: {},
