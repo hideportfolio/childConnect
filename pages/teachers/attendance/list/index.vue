@@ -3,7 +3,7 @@
     <h1>園児一覧</h1>
     <div class="date">{{date}}</div>
     <div>
-        <li v-for="(item,index) in attendances.items" :key="index" class="chlderen-list">
+        <li v-for="(item,index) in attendances.items" :key="index" class="children-list">
           <div class="name-box">
             {{ item.user.lastname }} {{ item.user.firstname }}
           </div>
@@ -70,7 +70,7 @@ export default {
   margin: 15px auto 5px;
 }
 
-.chlderen-list {
+.children-list {
   color: #825959;
   width: 90%;
   max-width: 300px;
@@ -88,10 +88,10 @@ export default {
   justify-content: space-evenly;
 }
 .name-box {
-  margin:0 0 0 auto
+  margin:0 0 0 auto;
 }
 .button-box {
-  margin:0 0 0 auto
+  margin:0 0 0 auto;
 }
 .attend {
   padding: 1px 7px;
