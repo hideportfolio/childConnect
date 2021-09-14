@@ -1,4 +1,5 @@
 <template>
+ <div class="card">
   <div class = "form">
     <h1>ログイン</h1>
     <form action="post">
@@ -15,6 +16,7 @@
       <div class="submit"><button @click="login()">ログイン</button></div>
     </form>
   </div>
+  </div>
 </template>
 
 <style>
@@ -25,18 +27,22 @@
   }
   .form p{    
     text-align:left;
-    width:250px;
+    width:90%;
+    max-width:300px;
     font-size: 20px;
+    padding-left:10px;
   }
   .form-title{
     text-align: center;
   }
   .container {
-    width:250px;
+    width:90%;
+    max-width:300px;
     margin:0 auto;
   }
   .ID, .pass{
-    width:250px;
+    width:90%;
+    max-width:300px;
   }
   .submit{
     text-align: center;
