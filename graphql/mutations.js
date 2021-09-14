@@ -23,6 +23,12 @@ export const createAttendance = /* GraphQL */ `
       schoolId
       id
       userId
+      user {
+        id
+        firstname
+        lastname
+        type
+      }
       date
       attendance
       timestamp
@@ -47,6 +53,12 @@ export const updateAttendance = /* GraphQL */ `
       schoolId
       id
       userId
+      user {
+        id
+        firstname
+        lastname
+        type
+      }
       date
       attendance
       timestamp

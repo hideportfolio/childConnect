@@ -34,6 +34,12 @@ export const getAttendance = /* GraphQL */ `
       schoolId
       id
       userId
+      user {
+        id
+        firstname
+        lastname
+        type
+      }
       date
       attendance
       timestamp
@@ -68,6 +74,12 @@ export const listAttendaces = /* GraphQL */ `
         schoolId
         id
         userId
+        user {
+          id
+          firstname
+          lastname
+          type
+        }
         date
         attendance
         timestamp
@@ -123,6 +135,12 @@ export const attendancesByDate = /* GraphQL */ `
         schoolId
         id
         userId
+        user {
+          id
+          firstname
+          lastname
+          type
+        }
         date
         attendance
         timestamp
