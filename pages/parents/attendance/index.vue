@@ -11,6 +11,7 @@
         <label for="absence" class="absence">欠席</label>
       </p>
       <p>
+        <label class="">メッセージ</label>
         <input type="text" placeholder="欠席理由">
       </p>
 
