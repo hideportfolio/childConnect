@@ -28,6 +28,59 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
+export const getAttendance = /* GraphQL */ `
+  query GetAttendance($userId: ID!, $date: String!) {
+    getAttendance(userId: $userId, date: $date) {
+      schoolId
+      userId
+      date
+      id
+      attendance
+      timestamp
+      threads {
+        items {
+          id
+          attendanceId
+          userId
+          contents
+        }
+        nextToken
+      }
+    }
+  }
+`;
+export const listAttendaces = /* GraphQL */ `
+  query ListAttendaces(
+    $userId: ID
+    $date: ModelStringKeyConditionInput
+    $filter: ModelAttendanceFilterInput
+    $limit: Int
+    $nextToken: String
+    $sortDirection: ModelSortDirection
+  ) {
+    listAttendaces(
+      userId: $userId
+      date: $date
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      sortDirection: $sortDirection
+    ) {
+      items {
+        schoolId
+        userId
+        date
+        id
+        attendance
+        timestamp
+        threads {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
 export const listThreads = /* GraphQL */ `
   query ListThreads(
     $filter: ModelThreadFilterInput
@@ -46,6 +99,38 @@ export const listThreads = /* GraphQL */ `
           type
         }
         contents
+      }
+      nextToken
+    }
+  }
+`;
+export const attendancesByDate = /* GraphQL */ `
+  query AttendancesByDate(
+    $schoolId: ID
+    $date: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelAttendanceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    AttendancesByDate(
+      schoolId: $schoolId
+      date: $date
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        schoolId
+        userId
+        date
+        id
+        attendance
+        timestamp
+        threads {
+          nextToken
+        }
       }
       nextToken
     }
