@@ -28,6 +28,7 @@
     font-style: bold;
     margin: 0 auto;
   }
+
   h1{
     width: 100%;
     font-size: 24px;
@@ -58,5 +59,23 @@
     background-color: #825959;
     color: #FFFFFF;
     transition: 0.3s;
+  }
+  .back{
+    background-color: #FFFFFF;
+    color: #A1CAE2;
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    border: 2px #FFFFFF solid;
+    border-radius: 10px;
+  }
+  .back:before{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    content: "";
+    background: url("~assets/left-arrow-icon.svg");
+    vertical-align: middle;
+    margin: 1px 1px 4px 1px;
   }
 </style>
