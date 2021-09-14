@@ -15,23 +15,6 @@
         </li>
     </div>
   </div>
-</template><template>
-  <div class="card">
-    <h1>園児一覧</h1>
-    <div class="date">{{date}}</div>
-    <div>
-        <li v-for="(item,index) in attendances.items" :key="index" class="children-list">
-          <div class="name-box">
-            {{ item.user.lastname }} {{ item.user.firstname }}
-          </div>
-          <div class="button-box">
-            <button v-if="item.attendance === 'ATTEND'" class="attend">出席</button>
-            <button v-if="item.attendance === 'ABSENT'" class="absent">欠席</button>
-            <button type=“button” class="detail" @click="$router.push({ path: '/teachers/attendance/detail', query: { user: item.userId, date: item.date }})" >詳細</button>
-          </div>
-        </li>
-    </div>
-  </div>
 </template>
 
 <script>
