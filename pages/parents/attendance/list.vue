@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>{{ user }}の出席一覧</p>
+    <p>あなたのお子さんの出席一覧</p>
     <p>{{ attendances }}</p>
   </div>
 </template>
@@ -18,14 +18,9 @@ export default {
     }
   },
   created () {
-    this.setUser()
     this.listAttendances()
   },
   methods: {
-    async setUser () {
-      const auth = await Auth.currentUserInfo()
-      this.user = auth
-    },
     async listAttendances () {
       const auth = await Auth.currentUserInfo()
       const res = await API.graphql(graphqlOperation(AttendancesByUser, {
