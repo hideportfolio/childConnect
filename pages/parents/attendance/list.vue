@@ -8,7 +8,7 @@
 <script>
 import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
-import { AttendancesByUser } from '~/graphql/queries'
+import { listAttendaces } from '~/graphql/queries'
 
 export default {
   data () {
@@ -22,10 +22,10 @@ export default {
   methods: {
     async listAttendances () {
       const auth = await Auth.currentUserInfo()
-      const res = await API.graphql(graphqlOperation(AttendancesByUser, {
+      const res = await API.graphql(graphqlOperation(listAttendaces, {
         userId: auth.username
       }))
-      this.attendances = res.data.AttendancesByDate
+      this.attendances = res.data.listAttendaces
     }
   }
 }
