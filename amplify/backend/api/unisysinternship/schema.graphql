@@ -1,5 +1,5 @@
 type User @model (
-    mutations: {create: null, delete: null, update: "updateUser"}
+    mutations: { create: null, delete: null, update: "updateUser" }
     timestamps: null
     subscriptions: null
   )
@@ -15,21 +15,43 @@ type User @model (
 }
 
 type Attendance @model (
-    queries: {list: "listAttendaces", get: "getAttendance"}
-    mutations: {create: "createAttendance", delete: null, update: "updateAttendance"}
+    queries: { list: "listAttendaces", get: "getAttendance" }
+    mutations: { create: "createAttendance", delete: null, update: "updateAttendance" }
     timestamps: null
     subscriptions: null
   )
   @auth(rules: [
-    { allow: private, provider: userPools, operations:[create, update, read] }
+    { allow: owner, ownerField: "userId", provider: userPools, operations:[create, read, update] },
+    { allow: groups, groups: ["Teachers"], operations: [read] }
   ])
-  @key(fields: ["userId", "date"])
+  @key(fields: ["id"])
+  @key(name: "date-index", fields: ["schoolId", "date"], queryField: "AttendancesByDate")
 {
-  school: ID!
+  schoolId: ID!
+  id: ID!
   userId: ID!
   date: String!
   attendance: AttendanceType!
   timestamp: Int!
+  threads: [Thread] @connection(keyName: "attendance-index", fields: ["id"])
+}
+
+type Thread @model (
+    queries: { list: "listThreads", get: null }
+    mutations: { create: "createThread", delete: null, update: null }
+    timestamps: null
+    subscriptions: null
+  )
+  @auth(rules: [
+    { allow: private, provider: userPools, operations:[create, read] }
+  ])
+  @key(name: "attendance-index", fields: ["attendanceId", "id"], queryField: "ThreadsByAttendance")
+{
+  id: ID
+  attendanceId: ID!
+  userId: ID!
+  user: User @connection(fields: ["userId"])
+  contents: String!
 }
 
 enum UserType { TEACHER PARENT }

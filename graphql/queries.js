@@ -29,39 +29,139 @@ export const listUsers = /* GraphQL */ `
   }
 `;
 export const getAttendance = /* GraphQL */ `
-  query GetAttendance($userId: ID!, $date: String!) {
-    getAttendance(userId: $userId, date: $date) {
-      school
+  query GetAttendance($id: ID!) {
+    getAttendance(id: $id) {
+      schoolId
+      id
       userId
       date
       attendance
       timestamp
+      threads {
+        items {
+          id
+          attendanceId
+          userId
+          contents
+        }
+        nextToken
+      }
     }
   }
 `;
 export const listAttendaces = /* GraphQL */ `
   query ListAttendaces(
-    $userId: ID
-    $date: ModelStringKeyConditionInput
+    $id: ID
     $filter: ModelAttendanceFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
     listAttendaces(
-      userId: $userId
-      date: $date
+      id: $id
       filter: $filter
       limit: $limit
       nextToken: $nextToken
       sortDirection: $sortDirection
     ) {
       items {
-        school
+        schoolId
+        id
         userId
         date
         attendance
         timestamp
+        threads {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const listThreads = /* GraphQL */ `
+  query ListThreads(
+    $filter: ModelThreadFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listThreads(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        attendanceId
+        userId
+        user {
+          id
+          firstname
+          lastname
+          type
+        }
+        contents
+      }
+      nextToken
+    }
+  }
+`;
+export const attendancesByDate = /* GraphQL */ `
+  query AttendancesByDate(
+    $schoolId: ID
+    $date: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelAttendanceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    AttendancesByDate(
+      schoolId: $schoolId
+      date: $date
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        schoolId
+        id
+        userId
+        date
+        attendance
+        timestamp
+        threads {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const threadsByAttendance = /* GraphQL */ `
+  query ThreadsByAttendance(
+    $attendanceId: ID
+    $id: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelThreadFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ThreadsByAttendance(
+      attendanceId: $attendanceId
+      id: $id
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        attendanceId
+        userId
+        user {
+          id
+          firstname
+          lastname
+          type
+        }
+        contents
       }
       nextToken
     }

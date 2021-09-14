@@ -26,9 +26,11 @@ export default {
       const auth = await Auth.currentUserInfo()
       const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000)) // Timezone Tokyo
       const date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+      const id = auth.username + now.getFullYear() + (now.getMonth() + 1) + now.getDate()
       const res = await API.graphql(graphqlOperation(createAttendance, {
         input: {
-          school: 'school',
+          schoolId: 'school',
+          id,
           userId: auth.username,
           date,
           attendance: this.attendance,
