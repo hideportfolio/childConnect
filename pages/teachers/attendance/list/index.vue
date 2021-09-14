@@ -48,9 +48,6 @@ export default {
         date: { eq: this.date }
       }))
       this.attendances = res.data.AttendancesByDate
-    },
-    detailLink (item) {
-      this.$router.push({ name: '/teachers/attendance/detail', params: { user: item.id, date: item.date } })
     }
   }
 }
