@@ -67,7 +67,8 @@ export default {
           input: {
             attendanceId: attendanceRes.data.createAttendance.id,
             userId: auth.username,
-            contents: this.remarks
+            contents: this.remarks,
+            timestamp: Math.floor(Date.now() / 1000)
           }
         }))
         console.log(remarksRes)

@@ -49,6 +49,7 @@ export const getAttendance = /* GraphQL */ `
           attendanceId
           userId
           contents
+          timestamp
         }
         nextToken
       }
@@ -111,6 +112,7 @@ export const listThreads = /* GraphQL */ `
           type
         }
         contents
+        timestamp
       }
       nextToken
     }
@@ -128,6 +130,44 @@ export const attendancesByDate = /* GraphQL */ `
     AttendancesByDate(
       schoolId: $schoolId
       date: $date
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        schoolId
+        userId
+        user {
+          id
+          firstname
+          lastname
+          type
+        }
+        date
+        id
+        attendance
+        timestamp
+        threads {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const attendancesByUser = /* GraphQL */ `
+  query AttendancesByUser(
+    $schoolId: ID
+    $userId: ModelIDKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelAttendanceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    AttendancesByUser(
+      schoolId: $schoolId
+      userId: $userId
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit
@@ -182,6 +222,41 @@ export const threadsByAttendance = /* GraphQL */ `
           type
         }
         contents
+        timestamp
+      }
+      nextToken
+    }
+  }
+`;
+export const threadsByTimestamp = /* GraphQL */ `
+  query ThreadsByTimestamp(
+    $attendanceId: ID
+    $timestamp: ModelIntKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelThreadFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    ThreadsByTimestamp(
+      attendanceId: $attendanceId
+      timestamp: $timestamp
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        attendanceId
+        userId
+        user {
+          id
+          firstname
+          lastname
+          type
+        }
+        contents
+        timestamp
       }
       nextToken
     }
