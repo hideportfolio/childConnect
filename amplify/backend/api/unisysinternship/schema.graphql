@@ -42,7 +42,7 @@ type Thread @model (
     queries: { list: "listThreads", get: null }
     mutations: { create: "createThread", delete: null, update: null }
     timestamps: null
-    subscriptions: null
+    subscriptions: { level: public }
   )
   @auth(rules: [
     { allow: private, provider: userPools, operations:[create, read] }
