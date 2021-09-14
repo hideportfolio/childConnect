@@ -2,7 +2,7 @@
   <div class="a">
     <div class="card">
       <h1>出席登録</h1>
-      <div class="date">{{todayData}}</div>
+      <div class="date">{{ todayData }}</div>
       <p>
         <input name="attend" type="radio" v-model="attendance" value="ATTEND" id="attend">
         <label for="attend" class="attend">出席</label>
@@ -14,7 +14,7 @@
         <div class="text">
           <label for="text" class="text-label">メッセージ（任意）</label>
         </div>
-        <textarea name="text" rows="5" cols="10" v-model="text">ここに記入してください</textarea>
+        <textarea name="text" rows="5" cols="10" v-model="remarks">ここに記入してください</textarea>
       </p>
 
       <div class="submit-box">
@@ -23,11 +23,12 @@
     </div>
   </div>
 </template>
+
 <!--attendanceType : プルダウン形式や保存するやデータの制限用に使うかもしれない//-->
 <script>
 import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
-import { createAttendance } from '~/graphql/mutations'
+import { createAttendance, createThread } from '~/graphql/mutations'
 export default {
   layout: 'default',
   middleware: 'auth',
@@ -39,7 +40,13 @@ export default {
         'ABSENT'
       ],
       date: '',
-      text: ''
+      remarks: ''
+    }
+  },
+  computed: {
+    todayData () {
+      const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000))
+      return (now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate())
     }
   },
   methods: {
@@ -47,7 +54,7 @@ export default {
       const auth = await Auth.currentUserInfo()
       const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000)) // Timezone Tokyo
       const date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
-      const res = await API.graphql(graphqlOperation(createAttendance, {
+      const attendanceRes = await API.graphql(graphqlOperation(createAttendance, {
         input: {
           schoolId: 'school',
           userId: auth.username,
@@ -56,13 +63,16 @@ export default {
           timestamp: Math.floor(Date.now() / 1000)
         }
       }))
-      console.log(res)
-    }
-  },
-  computed: {
-    todayData () {
-      const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000))
-      return (now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate())
+      if (this.remarks !== '') {
+        const remarksRes = await API.graphql(graphqlOperation(createThread, {
+          input: {
+            attendanceId: attendanceRes.data.createAttendance.id,
+            userId: auth.username,
+            contents: this.remarks
+          }
+        }))
+        console.log(remarksRes)
+      }
     }
   }
 }
