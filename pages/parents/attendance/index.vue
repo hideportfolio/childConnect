@@ -2,7 +2,7 @@
   <div class="a">
     <div class="card">
       <h1>出席登録</h1>
-      <div class="date">{{todayData}}</div>
+      <div class="date">{{ todayData }}</div>
       <p>
         <input name="attend" type="radio" v-model="attendance" value="ATTEND" id="attend">
         <label for="attend" class="attend">出席</label>
@@ -10,19 +10,25 @@
         <input name="attend" type="radio" v-model="attendance" value="ABSENT" id="absence">
         <label for="absence" class="absence">欠席</label>
       </p>
+      <p>
+        <div class="text">
+          <label for="text" class="text-label">メッセージ（任意）</label>
+        </div>
+        <textarea name="text" rows="5" cols="10" v-model="remarks">ここに記入してください</textarea>
+      </p>
 
       <div class="submit-box">
         <button @click="postAttendace()" class="submit">登録</button>
       </div>
     </div>
   </div>
-
 </template>
+
 <!--attendanceType : プルダウン形式や保存するやデータの制限用に使うかもしれない//-->
 <script>
 import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
-import { createAttendance } from '~/graphql/mutations'
+import { createAttendance, createThread } from '~/graphql/mutations'
 export default {
   layout: 'default',
   middleware: 'auth',
@@ -33,7 +39,14 @@ export default {
         'ATTEND',
         'ABSENT'
       ],
-      date: ''
+      date: '',
+      remarks: ''
+    }
+  },
+  computed: {
+    todayData () {
+      const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000))
+      return (now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate())
     }
   },
   methods: {
@@ -41,7 +54,7 @@ export default {
       const auth = await Auth.currentUserInfo()
       const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000)) // Timezone Tokyo
       const date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
-      const res = await API.graphql(graphqlOperation(createAttendance, {
+      const attendanceRes = await API.graphql(graphqlOperation(createAttendance, {
         input: {
           schoolId: 'school',
           userId: auth.username,
@@ -50,13 +63,16 @@ export default {
           timestamp: Math.floor(Date.now() / 1000)
         }
       }))
-      console.log(res)
-    }
-  },
-  computed: {
-    todayData () {
-      const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000))
-      return (now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate())
+      if (this.remarks !== '') {
+        const remarksRes = await API.graphql(graphqlOperation(createThread, {
+          input: {
+            attendanceId: attendanceRes.data.createAttendance.id,
+            userId: auth.username,
+            contents: this.remarks
+          }
+        }))
+        console.log(remarksRes)
+      }
     }
   }
 }
@@ -85,6 +101,7 @@ h1 {
 p {
   display:flex;
   justify-content:center;
+  margin-bottom: 5px;
 }
 
 .date {
@@ -99,7 +116,7 @@ p {
   width: 100px;
   height: 21px;
 
-  margin: 20px auto;
+  margin: 15px auto 5px;
 }
 
 input[type=radio]{
@@ -157,6 +174,21 @@ input[type=radio]:checked + label.absence {
   background-color: #FF7676;
 }
 
+.text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 14px;
+
+  color: #825959;
+  margin: 0 auto;
+  width: 251px;
+}
+.text-label {
+  margin-bottom: 1px;
+}
+
 .submit-box {
   display:flex;
   justify-content:center;
@@ -174,4 +206,14 @@ input[type=radio]:checked + label.absence {
   border: 1px solid #825959;
 }
 
+textarea {
+  width: 251px;
+  height: 83px;
+  background: #FFFFFF;
+  border: 1px solid #825959;
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin: 0 auto;
+  resize: none;
+}
 </style>
