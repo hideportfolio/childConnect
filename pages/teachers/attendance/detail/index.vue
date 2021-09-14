@@ -9,11 +9,13 @@
           <button v-if="attendance.attendance === 'ATTEND'" class="attend">出席</button>
           <button v-if="attendance.attendance === 'ABSENT'" class="absent">欠席</button>
         </span>
-        <!-- <span class="name" v-if="attendance.user">{{attendance.user.lastname}} {{ attendance.user.firstname }}</span> -->
+        <span class="name" v-if="attendance.user">{{attendance.user.lastname}} {{ attendance.user.firstname }}</span>
       </div>
-      <p>メッセージ</p>
+      <br>
+      <button class="past-message" @click="$router.push({ path: '/teachers/attendance/detail', query: { user: item.userId, date: item.date }})">過去のメッセージ></button>
+      <p>最新メッセージ</p>
       <div class="parent-message">
-        <!-- <p v-if="attendance.threads">{{ attendance.threads.items[0].contents }}</p> -->
+        <p v-if="attendance.threads">{{ attendance.threads.items[0].contents }}</p>
       </div>
       <br>
       <p>返信</p>
@@ -89,7 +91,7 @@ export default {
     font-size: 18px;
     border: none;
     outline: none;
-    border-radius:10px;
+    border-radius:5px;
     color:#FFFFFF;
     background-color: #6CED9C;
   }
@@ -97,9 +99,19 @@ export default {
     font-size: 18px;
     border: none;
     outline: none;
-    border-radius:10px;
+    border-radius:5px;
     color:#FFFFFF;
     background-color: #FF7676;
+  }
+  .past-message{
+    font-size: 14px;
+    border: none;
+    outline: none;
+    border-radius:5px;
+    color:#FFFFFF;
+    background-color: #A1CAE2;
+    margin:0 0 0 auto;
+    width: 135px;
   }
   .parent-message{
     font-size: 18px;
@@ -109,7 +121,7 @@ export default {
     margin: 0 auto;
     border: 1px solid #EFEFEF;
     background-color:#EFEFEF;
-    border-radius: 10px;
+    border-radius: 5px;
   }
   .submit{
     font-size: 18px;
