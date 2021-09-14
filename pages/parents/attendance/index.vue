@@ -18,12 +18,11 @@
   </div>
 
 </template>
-
+<!--attendanceType : プルダウン形式や保存するやデータの制限用に使うかもしれない//-->
 <script>
 import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import { createAttendance } from '~/graphql/mutations'
-
 export default {
   layout: 'default',
   middleware: 'auth',
@@ -55,7 +54,13 @@ export default {
       }))
       console.log(res)
     }
-  }
+  },
+  // computed: {
+  //   todayData: function () {
+  //     const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000)) // Timezone Tokyo
+  //     return now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate()
+  //   }
+  // }
 }
 </script>
 
