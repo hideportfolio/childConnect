@@ -38,6 +38,7 @@ export const createAttendance = /* GraphQL */ `
           attendanceId
           userId
           contents
+          timestamp
         }
         nextToken
       }
@@ -68,6 +69,7 @@ export const updateAttendance = /* GraphQL */ `
           attendanceId
           userId
           contents
+          timestamp
         }
         nextToken
       }
@@ -90,6 +92,7 @@ export const createThread = /* GraphQL */ `
         type
       }
       contents
+      timestamp
     }
   }
 `;

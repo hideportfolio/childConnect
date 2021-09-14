@@ -30,7 +30,8 @@ export default {
         input: {
           attendanceId: this.attendance.id,
           userId: auth.username,
-          contents: this.replay
+          contents: this.replay,
+          timestamp: Math.floor(Date.now() / 1000)
         }
       }))
       console.log(res)
