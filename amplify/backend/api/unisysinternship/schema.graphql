@@ -29,6 +29,7 @@ type Attendance @model (
 {
   schoolId: ID!
   userId: ID!
+  user: User! @connection(fields: ["userId"])
   date: String!
   id: ID
   attendance: AttendanceType!
@@ -50,7 +51,7 @@ type Thread @model (
   id: ID
   attendanceId: ID!
   userId: ID!
-  user: User @connection(fields: ["userId"])
+  user: User! @connection(fields: ["userId"])
   contents: String!
 }
 

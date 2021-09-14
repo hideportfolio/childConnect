@@ -33,6 +33,12 @@ export const getAttendance = /* GraphQL */ `
     getAttendance(userId: $userId, date: $date) {
       schoolId
       userId
+      user {
+        id
+        firstname
+        lastname
+        type
+      }
       date
       id
       attendance
@@ -69,6 +75,12 @@ export const listAttendaces = /* GraphQL */ `
       items {
         schoolId
         userId
+        user {
+          id
+          firstname
+          lastname
+          type
+        }
         date
         id
         attendance
@@ -124,6 +136,12 @@ export const attendancesByDate = /* GraphQL */ `
       items {
         schoolId
         userId
+        user {
+          id
+          firstname
+          lastname
+          type
+        }
         date
         id
         attendance

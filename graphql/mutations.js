@@ -22,6 +22,12 @@ export const createAttendance = /* GraphQL */ `
     createAttendance(input: $input, condition: $condition) {
       schoolId
       userId
+      user {
+        id
+        firstname
+        lastname
+        type
+      }
       date
       id
       attendance
@@ -46,6 +52,12 @@ export const updateAttendance = /* GraphQL */ `
     updateAttendance(input: $input, condition: $condition) {
       schoolId
       userId
+      user {
+        id
+        firstname
+        lastname
+        type
+      }
       date
       id
       attendance
