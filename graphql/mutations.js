@@ -21,7 +21,6 @@ export const createAttendance = /* GraphQL */ `
   ) {
     createAttendance(input: $input, condition: $condition) {
       schoolId
-      id
       userId
       user {
         id
@@ -30,6 +29,7 @@ export const createAttendance = /* GraphQL */ `
         type
       }
       date
+      id
       attendance
       timestamp
       threads {
@@ -51,7 +51,6 @@ export const updateAttendance = /* GraphQL */ `
   ) {
     updateAttendance(input: $input, condition: $condition) {
       schoolId
-      id
       userId
       user {
         id
@@ -60,6 +59,7 @@ export const updateAttendance = /* GraphQL */ `
         type
       }
       date
+      id
       attendance
       timestamp
       threads {

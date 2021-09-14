@@ -29,10 +29,9 @@ export const listUsers = /* GraphQL */ `
   }
 `;
 export const getAttendance = /* GraphQL */ `
-  query GetAttendance($id: ID!) {
-    getAttendance(id: $id) {
+  query GetAttendance($userId: ID!, $date: String!) {
+    getAttendance(userId: $userId, date: $date) {
       schoolId
-      id
       userId
       user {
         id
@@ -41,6 +40,7 @@ export const getAttendance = /* GraphQL */ `
         type
       }
       date
+      id
       attendance
       timestamp
       threads {
@@ -57,14 +57,16 @@ export const getAttendance = /* GraphQL */ `
 `;
 export const listAttendaces = /* GraphQL */ `
   query ListAttendaces(
-    $id: ID
+    $userId: ID
+    $date: ModelStringKeyConditionInput
     $filter: ModelAttendanceFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
     listAttendaces(
-      id: $id
+      userId: $userId
+      date: $date
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -72,7 +74,6 @@ export const listAttendaces = /* GraphQL */ `
     ) {
       items {
         schoolId
-        id
         userId
         user {
           id
@@ -81,6 +82,7 @@ export const listAttendaces = /* GraphQL */ `
           type
         }
         date
+        id
         attendance
         timestamp
         threads {
@@ -133,7 +135,6 @@ export const attendancesByDate = /* GraphQL */ `
     ) {
       items {
         schoolId
-        id
         userId
         user {
           id
@@ -142,6 +143,7 @@ export const attendancesByDate = /* GraphQL */ `
           type
         }
         date
+        id
         attendance
         timestamp
         threads {
