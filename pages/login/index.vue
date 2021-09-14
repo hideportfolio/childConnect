@@ -37,7 +37,12 @@ export default {
       if (res.challengeName === 'NEW_PASSWORD_REQUIRED') {
         await res.completeNewPasswordChallenge(this.loginpw, {}, { onSuccess () {}, onFailure () {} })
       }
-      this.$router.push('/')
+      await this.$store.dispatch('user/getProfile')
+      if (this.$store.getters['user/profile'].type === 'PARENT') {
+        this.$router.push('/parents/attendance')
+      } else if (this.$store.getters['user/profile'].type === 'TEACHER') {
+        this.$router.push('/teachers/attendance/list')
+      } else { this.$router.push('/') }
     }
   }
 }
