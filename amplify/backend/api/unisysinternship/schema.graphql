@@ -24,13 +24,13 @@ type Attendance @model (
     { allow: owner, ownerField: "userId", provider: userPools, operations:[create, read, update] },
     { allow: groups, groups: ["Teachers"], operations: [read] }
   ])
-  @key(fields: ["id"])
+  @key(fields: ["userId", "date"])
   @key(name: "date-index", fields: ["schoolId", "date"], queryField: "AttendancesByDate")
 {
   schoolId: ID!
-  id: ID!
   userId: ID!
   date: String!
+  id: ID
   attendance: AttendanceType!
   timestamp: Int!
   threads: [Thread] @connection(keyName: "attendance-index", fields: ["id"])
