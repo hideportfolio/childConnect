@@ -18,38 +18,38 @@
 </template>
 
 <script>
-import { Auth } from "aws-amplify";
+import { Auth } from 'aws-amplify'
 
 export default {
-  layout: "default",
-  data() {
+  layout: 'default',
+  data () {
     return {
       valid: false,
-      loginid: "",
-      loginpw: "",
-    };
+      loginid: '',
+      loginpw: ''
+    }
   },
   methods: {
-    async login() {
-      const res = await Auth.signIn(this.loginid, this.loginpw);
-      if (res.challengeName === "NEW_PASSWORD_REQUIRED") {
+    async login () {
+      const res = await Auth.signIn(this.loginid, this.loginpw)
+      if (res.challengeName === 'NEW_PASSWORD_REQUIRED') {
         await res.completeNewPasswordChallenge(
           this.loginpw,
           {},
-          { onSuccess() {}, onFailure() {} }
-        );
+          { onSuccess () {}, onFailure () {} }
+        )
       }
-      await this.$store.dispatch("user/getProfile");
-      if (this.$store.getters["user/profile"].type === "PARENT") {
-        this.$router.push("/parents/attendance");
-      } else if (this.$store.getters["user/profile"].type === "TEACHER") {
-        this.$router.push("/teachers/attendance/list");
+      await this.$store.dispatch('user/getProfile')
+      if (this.$store.getters['user/profile'].type === 'PARENT') {
+        this.$router.push('/parents/attendance')
+      } else if (this.$store.getters['user/profile'].type === 'TEACHER') {
+        this.$router.push('/teachers/attendance/list')
       } else {
-        this.$router.push("/");
+        this.$router.push('/')
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 
 <style>
