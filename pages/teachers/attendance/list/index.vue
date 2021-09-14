@@ -14,7 +14,6 @@
           </div>
         </li>
     </div>
-
   </div>
 </template><template>
   <div class="card">
@@ -32,7 +31,6 @@
           </div>
         </li>
     </div>
-
   </div>
 </template>
 
@@ -144,7 +142,6 @@ export default {
   margin-top: 5px;
 }
 </style>
-
 
 <script>
 import API, { graphqlOperation } from '@aws-amplify/api'
