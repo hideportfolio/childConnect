@@ -30,7 +30,6 @@ import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import { createAttendance, createThread } from '~/graphql/mutations'
 export default {
-  layout: 'default',
   middleware: 'auth',
   data () {
     return {
