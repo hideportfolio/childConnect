@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <div class="headerContents">出席管理システム</div>
+      <div class="headerContents">出欠管理システム</div>
     </header>
     <Nuxt />
   </div>
@@ -22,9 +22,10 @@
     z-index: 999;
   }
   .headerContents{
-    color: #825959;
+    color: #A1CAE2;
     max-width: 800px;
     font-size: 20px;
+    font-style: bold;
     margin: 0 auto;
   }
   h1{
@@ -32,16 +33,18 @@
     font-size: 24px;
     color: #FFFFFF;
     background-color: #A1CAE2;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 8px;
     margin-bottom: 5px;
   }
   .card{
+    width: 95%;
     max-width: 800px;
     background-color: #FFFFFF;
     margin: 20px auto;
     padding: 20px 10px 30px 10px;
   }
+
   .submit{
     background-color: #FFFFFF;
     color: #825959;
