@@ -68,7 +68,8 @@ form {
   text-align: left;
   width: 90%;
   max-width: 300px;
-  font-size: 20px;
+  font-size: 15px;
+  color: #825959;
 }
 .form-title {
   text-align: center;
@@ -81,7 +82,10 @@ form {
 .ID,
 .pass {
   width: 100%;
+  height: 30px;
   max-width: 300px;
+  border: 1px #825959 solid;
+  border-radius: 5px;
 }
 .submit {
   text-align: center;
