@@ -35,25 +35,27 @@ type Attendance @model (
   id: ID
   attendance: AttendanceType!
   timestamp: Int!
-  threads: [Thread] @connection(keyName: "attendance-index", fields: ["id"])
+  threads: [Thread] @connection(keyName: "timestamp-index", fields: ["id"])
 }
 
 type Thread @model (
     queries: { list: "listThreads", get: null }
     mutations: { create: "createThread", delete: null, update: null }
     timestamps: null
-    subscriptions: null
+    subscriptions: { level: public }
   )
   @auth(rules: [
     { allow: private, provider: userPools, operations:[create, read] }
   ])
   @key(name: "attendance-index", fields: ["attendanceId", "id"], queryField: "ThreadsByAttendance")
+  @key(name: "timestamp-index", fields: ["attendanceId", "timestamp"], queryField: "ThreadsByTimestamp")
 {
   id: ID
   attendanceId: ID!
   userId: ID!
   user: User! @connection(fields: ["userId"])
   contents: String!
+  timestamp: Int!
 }
 
 enum UserType { TEACHER PARENT }
