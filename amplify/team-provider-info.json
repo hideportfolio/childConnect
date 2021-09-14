@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "unisysinternshipb360718c": {}
+        "unisysinternshipb360718c": {},
+        "userPoolGroups": {}
       }
     }
   }
