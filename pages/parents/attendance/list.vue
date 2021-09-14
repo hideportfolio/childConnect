@@ -13,8 +13,7 @@ import { AttendancesByUser } from '~/graphql/queries'
 export default {
   data () {
     return {
-      attendances: [],
-      user: undefined
+      attendances: []
     }
   },
   created () {
