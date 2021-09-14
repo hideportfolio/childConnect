@@ -8,8 +8,11 @@
 </template>
 
 <script>
+import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import { getAttendance } from '~/graphql/queries'
+import { createThread } from '~/graphql/mutations'
+
 export default {
   data () {
     return {
@@ -22,7 +25,16 @@ export default {
   },
   methods: {
     async postReplay () {
-
+      const auth = await Auth.currentUserInfo()
+      const res = await API.graphql(graphqlOperation(createThread, {
+        input: {
+          attendanceId: this.attendance.id,
+          userId: auth.username,
+          contents: this.replay
+        }
+      }))
+      console.log(res)
+      this.replay = ''
     },
     async getAttendance () {
       const res = await API.graphql(graphqlOperation(getAttendance, {
