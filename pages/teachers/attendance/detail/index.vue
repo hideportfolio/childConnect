@@ -25,7 +25,10 @@ export default {
 
     },
     async getAttendance () {
-      const res = await API.graphql(graphqlOperation(getAttendance, { id: this.$route.params.id }))
+      const res = await API.graphql(graphqlOperation(getAttendance, {
+        userId: this.$route.query.user,
+        date: this.$route.query.date
+      }))
       this.attendance = res.data.getAttendance
     }
   }
