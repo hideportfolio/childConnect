@@ -28,57 +28,6 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
-export const getAttendance = /* GraphQL */ `
-  query GetAttendance($id: ID!) {
-    getAttendance(id: $id) {
-      schoolId
-      id
-      userId
-      date
-      attendance
-      timestamp
-      threads {
-        items {
-          id
-          attendanceId
-          userId
-          contents
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const listAttendaces = /* GraphQL */ `
-  query ListAttendaces(
-    $id: ID
-    $filter: ModelAttendanceFilterInput
-    $limit: Int
-    $nextToken: String
-    $sortDirection: ModelSortDirection
-  ) {
-    listAttendaces(
-      id: $id
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
-      items {
-        schoolId
-        id
-        userId
-        date
-        attendance
-        timestamp
-        threads {
-          nextToken
-        }
-      }
-      nextToken
-    }
-  }
-`;
 export const listThreads = /* GraphQL */ `
   query ListThreads(
     $filter: ModelThreadFilterInput
@@ -97,38 +46,6 @@ export const listThreads = /* GraphQL */ `
           type
         }
         contents
-      }
-      nextToken
-    }
-  }
-`;
-export const attendancesByDate = /* GraphQL */ `
-  query AttendancesByDate(
-    $schoolId: ID
-    $date: ModelStringKeyConditionInput
-    $sortDirection: ModelSortDirection
-    $filter: ModelAttendanceFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    AttendancesByDate(
-      schoolId: $schoolId
-      date: $date
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        schoolId
-        id
-        userId
-        date
-        attendance
-        timestamp
-        threads {
-          nextToken
-        }
       }
       nextToken
     }

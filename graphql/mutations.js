@@ -14,54 +14,6 @@ export const updateUser = /* GraphQL */ `
     }
   }
 `;
-export const createAttendance = /* GraphQL */ `
-  mutation CreateAttendance(
-    $input: CreateAttendanceInput!
-    $condition: ModelAttendanceConditionInput
-  ) {
-    createAttendance(input: $input, condition: $condition) {
-      schoolId
-      id
-      userId
-      date
-      attendance
-      timestamp
-      threads {
-        items {
-          id
-          attendanceId
-          userId
-          contents
-        }
-        nextToken
-      }
-    }
-  }
-`;
-export const updateAttendance = /* GraphQL */ `
-  mutation UpdateAttendance(
-    $input: UpdateAttendanceInput!
-    $condition: ModelAttendanceConditionInput
-  ) {
-    updateAttendance(input: $input, condition: $condition) {
-      schoolId
-      id
-      userId
-      date
-      attendance
-      timestamp
-      threads {
-        items {
-          id
-          attendanceId
-          userId
-          contents
-        }
-        nextToken
-      }
-    }
-  }
-`;
 export const createThread = /* GraphQL */ `
   mutation CreateThread(
     $input: CreateThreadInput!
