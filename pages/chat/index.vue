@@ -15,6 +15,7 @@ import { createThread } from '~/graphql/mutations'
 import { onCreateThread } from '~/graphql/subscriptions'
 
 export default {
+  middleware: 'auth',
   data () {
     return {
       subscription: null,
