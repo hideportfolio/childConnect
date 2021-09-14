@@ -2,12 +2,12 @@
   <div class="a">
     <div class="card">
       <h1>出席登録</h1>
-      <div class="date">2021/9/17</div>
+      <div class="date">{{todayData}}</div>
       <p>
-        <input name="attend" type="radio" value="1" id="attend">
+        <input name="attend" type="radio" v-model="attendance" value="ATTEND" id="attend">
         <label for="attend" class="attend">出席</label>
 
-        <input name="attend" type="radio" value="0" id="absence">
+        <input name="attend" type="radio" v-model="attendance" value="ABSENT" id="absence">
         <label for="absence" class="absence">欠席</label>
       </p>
       <p>
@@ -21,12 +21,11 @@
     </div>
   </div>
 </template>
-
+<!--attendanceType : プルダウン形式や保存するやデータの制限用に使うかもしれない//-->
 <script>
 import Auth from '@aws-amplify/auth'
 import API, { graphqlOperation } from '@aws-amplify/api'
 import { createAttendance } from '~/graphql/mutations'
-
 export default {
   layout: 'default',
   middleware: 'auth',
@@ -35,7 +34,7 @@ export default {
       attendance: 'ATTEND',
       attendanceType: [
         'ATTEND',
-        'ABUSENT'
+        'ABSENT'
       ],
       date: ''
     }
@@ -45,11 +44,9 @@ export default {
       const auth = await Auth.currentUserInfo()
       const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000)) // Timezone Tokyo
       const date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
-      const id = auth.username + now.getFullYear() + (now.getMonth() + 1) + now.getDate()
       const res = await API.graphql(graphqlOperation(createAttendance, {
         input: {
           schoolId: 'school',
-          id,
           userId: auth.username,
           date,
           attendance: this.attendance,
@@ -58,8 +55,15 @@ export default {
       }))
       console.log(res)
     }
+  },
+  computed: {
+    todayData () {
+      const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000))
+      return (now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate())
+    }
   }
 }
+
 </script>
 
 <style>
@@ -78,14 +82,6 @@ h1 {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 18px;
-  line-height: 21px;
-
-  background: #A1CAE2;
-  width: 265px;
-  height: 37px;
-  border-radius: 12px;
-  padding: 10px;
   margin: 0 auto;
 }
 
@@ -175,16 +171,10 @@ input[type=radio]:checked + label.absence {
   font-weight: normal;
   font-size: 24px;
   line-height: 28px;
-  color: #825959;
+
   margin: 20px auto;
 
-  width: 256px;
-  height: 52px;
-
-  background: #FFFFFF;
   border: 1px solid #825959;
-  box-sizing: border-box;
-  border-radius: 50px;
 }
 
 </style>

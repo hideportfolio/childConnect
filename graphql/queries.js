@@ -29,12 +29,12 @@ export const listUsers = /* GraphQL */ `
   }
 `;
 export const getAttendance = /* GraphQL */ `
-  query GetAttendance($id: ID!) {
-    getAttendance(id: $id) {
+  query GetAttendance($userId: ID!, $date: String!) {
+    getAttendance(userId: $userId, date: $date) {
       schoolId
-      id
       userId
       date
+      id
       attendance
       timestamp
       threads {
@@ -51,14 +51,16 @@ export const getAttendance = /* GraphQL */ `
 `;
 export const listAttendaces = /* GraphQL */ `
   query ListAttendaces(
-    $id: ID
+    $userId: ID
+    $date: ModelStringKeyConditionInput
     $filter: ModelAttendanceFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
     listAttendaces(
-      id: $id
+      userId: $userId
+      date: $date
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -66,9 +68,9 @@ export const listAttendaces = /* GraphQL */ `
     ) {
       items {
         schoolId
-        id
         userId
         date
+        id
         attendance
         timestamp
         threads {
@@ -102,8 +104,40 @@ export const listThreads = /* GraphQL */ `
     }
   }
 `;
-export const threadByAttendance = /* GraphQL */ `
-  query ThreadByAttendance(
+export const attendancesByDate = /* GraphQL */ `
+  query AttendancesByDate(
+    $schoolId: ID
+    $date: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelAttendanceFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    AttendancesByDate(
+      schoolId: $schoolId
+      date: $date
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        schoolId
+        userId
+        date
+        id
+        attendance
+        timestamp
+        threads {
+          nextToken
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const threadsByAttendance = /* GraphQL */ `
+  query ThreadsByAttendance(
     $attendanceId: ID
     $id: ModelIDKeyConditionInput
     $sortDirection: ModelSortDirection
@@ -111,7 +145,7 @@ export const threadByAttendance = /* GraphQL */ `
     $limit: Int
     $nextToken: String
   ) {
-    ThreadByAttendance(
+    ThreadsByAttendance(
       attendanceId: $attendanceId
       id: $id
       sortDirection: $sortDirection
