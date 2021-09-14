@@ -10,13 +10,15 @@
         <input name="attend" type="radio" value="0" id="absence">
         <label for="absence" class="absence">欠席</label>
       </p>
+      <p>
+        <input type="text" placeholder="欠席理由">
+      </p>
 
       <div class="submit-box">
         <button @click="postAttendace()" class="submit">登録</button>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
