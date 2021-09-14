@@ -26,6 +26,7 @@ type Attendance @model (
   ])
   @key(fields: ["userId", "date"])
   @key(name: "date-index", fields: ["schoolId", "date"], queryField: "AttendancesByDate")
+  @key(name: "user-index", fields: ["schoolId", "userId"], queryField: "AttendancesByUser")
 {
   schoolId: ID!
   userId: ID!
