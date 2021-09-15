@@ -6,8 +6,8 @@
       <div class="date">{{ todayData }}</div>
       <div class="status">
         <span>
-          <button v-if="attendance.attendance === 'ATTEND'" class="attend">出席</button>
-          <button v-if="attendance.attendance === 'ABSENT'" class="absent">欠席</button>
+          <button v-if="attendance.attendance === 'ATTEND'" class="CLattend">出席</button>
+          <button v-if="attendance.attendance === 'ABSENT'" class="CLabsent">欠席</button>
         </span>
         <span class="name" v-if="attendance.user">{{attendance.user.lastname}} {{ attendance.user.firstname }}</span>
       </div>
@@ -78,85 +78,3 @@ export default {
   }
 }
 </script>
-
-<style>
-  .date{
-    text-align: center;
-    color: #825959;
-    font-size: 18px;
-    line-height: 21px;
-    width: 100px;
-    height: 21px;
-    margin: 15px auto 5px;
-  }
-  .attend{
-    font-size: 18px;
-    border: none;
-    outline: none;
-    border-radius:5px;
-    color:#FFFFFF;
-    background-color: #6CED9C;
-  }
-  .absent{
-    font-size: 18px;
-    border: none;
-    outline: none;
-    border-radius:5px;
-    color:#FFFFFF;
-    background-color: #FF7676;
-  }
-  .past-message{
-    font-size: 15px;
-    border: none;
-    outline: none;
-    border-radius:5px;
-    color:#FFFFFF;
-    background-color: #A1CAE2;
-    margin:0 0 0 auto;
-    width: 150px;
-  }
-  .no-message{
-    font-size: 14px;
-    padding: 10px;
-    margin-bottom: 10px;
-    margin: 0 auto;
-    border-radius: 5px;
-  }
-  .parent-message{
-    font-size: 18px;
-    padding: 10px;
-    margin: 0 auto;
-    border: 1px solid #EFEFEF;
-    background-color:#EFEFEF;
-    border-radius: 5px;
-    width: 100%;
-  }
-  .message-container {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  .replay-container {
-    max-width: 500px;
-    margin: 0 auto;
-  }
-  .submit{
-    font-size: 18px;
-    text-align: center;
-    margin: 0 auto;
-  }
-  .card{
-    color: #825959;
-  }
-  .status{
-    font-size: 18px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .name{
-    font-size: 30px;
-    margin: 0 auto;
-    text-align: center;
-    color: #825959;
-  }
-</style>

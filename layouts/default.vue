@@ -49,6 +49,7 @@
   .card{
     width: 96%;
     background-color: #FFFFFF;
+    color: #825959;
     margin: 10px auto;
     padding: 20px 10px 30px 10px;
   }
@@ -133,6 +134,7 @@
 .button-box {
   margin:0 0 0 auto;
 }
+/* 出席，欠席の状態 */
 .CLattend {
   padding: 1px 7px;
   height: 30px;
@@ -159,6 +161,7 @@
   line-height: 25px;
   cursor: default;
 }
+/* 詳細 */
 .detail {
   padding: 1px 7px;
   height: 30px;
@@ -169,4 +172,42 @@
   line-height: 25px;
   margin-top: 5px;
 }
+/* 詳細ページ */
+.past-message{
+  font-size: 15px;
+  border: none;
+  outline: none;
+  border-radius:5px;
+  color:#FFFFFF;
+  background-color: #A1CAE2;
+  margin:0 0 0 auto;
+  width: 150px;
+  }
+  .no-message{
+  font-size: 14px;
+  padding: 10px;
+  margin-bottom: 10px;
+  margin: 0 auto;
+  border-radius: 5px;
+  }
+  .parent-message{
+  font-size: 18px;
+  padding: 10px;
+  margin: 0 auto;
+  border: 1px solid #EFEFEF;
+  background-color:#EFEFEF;
+  border-radius: 5px;
+  width: 100%;
+  }
+  .status{
+  font-size: 18px;
+  margin: 0 auto;
+  text-align: center;
+  }
+  .name{
+  font-size: 30px;
+  margin: 0 auto;
+  text-align: center;
+  color: #825959;
+  }
 </style>
