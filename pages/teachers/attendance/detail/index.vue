@@ -32,7 +32,7 @@ import { getAttendance } from '~/graphql/queries'
 import { createThread } from '~/graphql/mutations'
 
 export default {
-  layout: 'default',
+  middleware: 'auth',
   data () {
     return {
       attendance: {},
@@ -109,14 +109,14 @@ export default {
     background-color: #FF7676;
   }
   .past-message{
-    font-size: 10px;
+    font-size: 15px;
     border: none;
     outline: none;
     border-radius:5px;
     color:#FFFFFF;
     background-color: #A1CAE2;
     margin:0 0 0 auto;
-    width: 135px;
+    width: 150px;
   }
   .no-message{
     font-size: 14px;
@@ -140,7 +140,7 @@ export default {
   }
   .replay-container {
     max-width: 300px;
-    margin: 0 auto;    
+    margin: 0 auto;
   }
   .submit{
     font-size: 18px;
@@ -150,20 +150,10 @@ export default {
   .card{
     color: #825959;
   }
-  .rep{
-    font-size: 18px;
-    color: #825959;
-  }
   .status{
     font-size: 18px;
     margin: 0 auto;
     text-align: center;
-  }
-  .rep{
-    font-size: 18px;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1.5px solid #825959;
   }
   .name{
     font-size: 30px;
