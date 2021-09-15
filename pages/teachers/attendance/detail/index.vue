@@ -11,17 +11,15 @@
         </span>
         <span class="name" v-if="attendance.user">{{attendance.user.lastname}} {{ attendance.user.firstname }}</span>
       </div>
-      <button class="past-message" @click="$router.push({ path: '/teachers/attendance/detail', query: { user: item.userId, date: item.date }})">過去のメッセージ></button>
+      <button class="past-message" v-if="attendance.id" @click="$router.push({ path: '/chat', query: { id: attendance.id }})">過去のメッセージ></button>
       <div class="message-container">
-        <span>最新メッセージ</span>
+        <span >最新メッセージ{{ latestMessage=='' ? 'はありません。' : '' }}</span>
         <div>
-          <p class="no-message" v-if="latestMessage==''">最新メッセージはありません。</p>
           <p class="parent-message" v-if="latestMessage!=''">{{latestMessage}}</p>
         </div>
       </div>
       <span>返信</span>
-      <input class="rep" v-model="replay" placeholder="返信">
-      <br>
+      <textarea class="rep" v-model="replay">確認しました！</textarea>
       <button class="submit" @click="postReplay()">返信</button>
     </div>
   </div>
@@ -139,6 +137,10 @@ export default {
   .message-container {
     max-width: 300px;
     margin: 0 auto;
+  }
+  .replay-container {
+    max-width: 300px;
+    margin: 0 auto;    
   }
   .submit{
     font-size: 18px;
