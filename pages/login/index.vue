@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <div class="form">
-      <h1>ログイン</h1>
+      <h1>マイページへ</h1>
       <div class="container">
         <p>ID</p>
         <input class="ID" v-model="loginid" placeholder="" />
