@@ -1,9 +1,27 @@
 <template>
   <div>
-    <p>This is attendance page.</p>
-    <span>{{ attendance.date }}</span><span>{{ attendance_dictionary[attendance.attendance] }}</span><br>
-    <input v-model="replay" placeholder="返信">
-    <button @click="postReplay()">Replay</button>
+    <button class="back" @click="$router.push({ path: '/parents/attendance/list' })">戻る</button>
+    <div class="card">
+      <h1>出欠の詳細</h1>
+      <div v-if="attendance.date" class="date">{{ attendance.date }}</div>
+      <div class="status">
+        <span>
+          <button v-if="attendance.attendance === 'ATTEND'" class="CLattend">出席</button>
+          <button v-if="attendance.attendance === 'ABSENT'" class="CLabsent">欠席</button>
+        </span>
+        <span v-if="attendance.user" class="name">{{attendance.user.lastname}} {{ attendance.user.firstname }}</span>
+      </div>
+      <button v-if="attendance.id" class="past-message" @click="$router.push({ path: '/chat', query: { id: attendance.id }})">過去のメッセージ></button>
+      <div class="message-container">
+        <span>最新メッセージ{{ latestMessage=='' ? 'はありません。' : '' }}</span>
+        <div>
+          <p v-if="latestMessage!=''" class="parent-message">{{ latestMessage }}</p>
+        </div>
+      </div>
+      <span>返信</span>
+      <textarea class="rep" v-model="replay"></textarea>
+      <button class="submit" @click="postReplay()">返信</button>
+    </div>
   </div>
 </template>
 
@@ -18,14 +36,12 @@ export default {
     return {
       attendance: {},
       replay: '',
-      attendance_dictionary: {
-        ATTEND: '出席',
-        ABSENT: '欠席'
-      }
+      latestMessage: ''
     }
   },
-  created () {
-    this.getAttendance()
+  async created () {
+    await this.getAttendance()
+    this.getLatestMessage()
   },
   methods: {
     async postReplay () {
@@ -46,6 +62,9 @@ export default {
         date: this.$route.query.date
       }))
       this.attendance = res.data.getAttendance
+    },
+    getLatestMessage () {
+      this.latestMessage = this.attendance.threads.items.length === 0 ? '' : this.attendance.threads.items[0].contents
     }
   }
 }

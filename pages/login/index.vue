@@ -66,8 +66,8 @@ form {
 }
 .form p {
   text-align: left;
-  width: 90%;
-  max-width: 300px;
+  width: 100%;
+  max-width: 500px;
   font-size: 15px;
   color: #825959;
 }
@@ -75,15 +75,15 @@ form {
   text-align: center;
 }
 .container {
-  width: 90%;
-  max-width: 300px;
+  width: 100%;
+  max-width: 500px;
   margin: 0 auto;
 }
 .ID,
 .pass {
   width: 100%;
-  height: 30px;
-  max-width: 300px;
+  height: 40px;
+  max-width: 500px;
   border: 1px #825959 solid;
   border-radius: 5px;
 }
