@@ -3,7 +3,7 @@
     <div class="card">
       <h1>あなたのお子様の出欠一覧</h1>
       <li v-for="(attendance, index) in attendances.items" :key="index" class="children-list">
-        <div class="name-box">{{ attendance.date }}</div>
+        <div class="name-box">{{ attendance.date.replace(/-/g,'/') }}</div>
         <div class="button-box">
           <button v-if="attendance.attendance === 'ATTEND'" class="CLattend">出席</button>
           <button v-if="attendance.attendance === 'ABSENT'" class="CLabsent">欠席</button>
