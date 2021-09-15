@@ -19,7 +19,7 @@
         </div>
       </div>
       <span>返信</span>
-      <textarea class="rep" v-model="replay">確認しました！</textarea>
+      <textarea class="rep" v-model="replay"></textarea>
       <button class="submit" @click="postReplay()">返信</button>
     </div>
   </div>
@@ -83,9 +83,6 @@ export default {
   .date{
     text-align: center;
     color: #825959;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
     font-size: 18px;
     line-height: 21px;
     width: 100px;
@@ -132,14 +129,15 @@ export default {
     border: 1px solid #EFEFEF;
     background-color:#EFEFEF;
     border-radius: 5px;
-    width: 270px;
+    width: 100%;
   }
   .message-container {
-    max-width: 300px;
+    width: 100%;
+    max-width: 500px;
     margin: 0 auto;
   }
   .replay-container {
-    max-width: 300px;
+    max-width: 500px;
     margin: 0 auto;
   }
   .submit{

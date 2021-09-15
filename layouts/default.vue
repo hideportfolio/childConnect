@@ -3,7 +3,9 @@
     <header>
       <div class="headerContents">出欠管理システム</div>
     </header>
-    <Nuxt />
+    <div class="MainContents">
+      <Nuxt />
+    </div>
   </div>
 </template>
 <style>
@@ -24,9 +26,14 @@
   }
   .headerContents{
     color: #A1CAE2;
-    max-width: 800px;
+    max-width: 520px;
     font-size: 20px;
     font-style: bold;
+    margin: 0 auto;
+  }
+
+  .MainContents{
+    max-width: 520px;
     margin: 0 auto;
   }
 
@@ -40,10 +47,9 @@
     margin-bottom: 5px;
   }
   .card{
-    width: 95%;
-    max-width: 800px;
+    width: 96%;
     background-color: #FFFFFF;
-    margin: 20px auto;
+    margin: 10px auto;
     padding: 20px 10px 30px 10px;
   }
   /* 登録ボタン等 */
@@ -71,6 +77,7 @@
     text-align: center;
     border: 2px #FFFFFF solid;
     border-radius: 10px;
+    margin-left: 2%;
   }
   .back:before{
     display: inline-block;
