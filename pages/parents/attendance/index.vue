@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <h1>出席登録</h1>
-      <div class="date">{{ todayData }}</div>
+      <div class="date">{{ todayData.replace('-','/') }}</div>
       <p class="attP">
         <input name="attend" type="radio" v-model="attendance" value="ATTEND" id="attend">
         <label for="attend" class="attend">出席</label>
