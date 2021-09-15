@@ -10,6 +10,6 @@
   max-width: 800px;
   background-color: #FFFFFF;
   margin: 20px auto;
-  padding: 20px 10px 30px 10px;
+  padding: 10px 10px 20px 10px;
 }
 </style>
