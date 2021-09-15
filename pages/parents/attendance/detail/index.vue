@@ -3,7 +3,7 @@
     <button class="back" @click="$router.push({ path: '/parents/attendance/list' })">戻る</button>
     <div class="card">
       <h1>出欠の詳細</h1>
-      <div class="date">{{ todayData }}</div>
+      <div v-if="attendance.date" class="date">{{ attendance.date }}</div>
       <div class="status">
         <span>
           <button v-if="attendance.attendance === 'ATTEND'" class="attend">出席</button>
@@ -36,14 +36,7 @@ export default {
     return {
       attendance: {},
       replay: '',
-      date: '',
       latestMessage: ''
-    }
-  },
-  computed: {
-    todayData () {
-      const now = new Date(Date.now() + ((new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000))
-      return (now.getFullYear() + '/' + (now.getMonth() + 1) + '/' + now.getDate())
     }
   },
   async created () {
