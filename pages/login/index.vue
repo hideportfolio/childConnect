@@ -41,7 +41,7 @@ export default {
       }
       await this.$store.dispatch('user/getProfile')
       if (this.$store.getters['user/profile'].type === 'PARENT') {
-        this.$router.push('/parents/attendance')
+        this.$router.push('/parents')
       } else if (this.$store.getters['user/profile'].type === 'TEACHER') {
         this.$router.push('/teachers/attendance/list')
       } else {
