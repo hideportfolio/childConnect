@@ -43,7 +43,7 @@ export default {
       if (this.$store.getters['user/profile'].type === 'PARENT') {
         this.$router.push('/parents')
       } else if (this.$store.getters['user/profile'].type === 'TEACHER') {
-        this.$router.push('/teachers/attendance/list')
+        this.$router.push('/teachers')
       } else {
         this.$router.push('/')
       }
