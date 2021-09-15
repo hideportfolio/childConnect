@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button class="back" @click="$router.push({ path: '/parents/' })">戻る</button>
     <div class="card">
       <h1>出欠登録</h1>
       <div class="date">{{ todayData.replace('-','/') }}</div>
@@ -16,7 +17,6 @@
         </div>
         <textarea name="text" v-model="remarks">ここに記入してください</textarea>
       </p>
-
       <div class="submit-box">
         <button @click="postAttendace()" class="submit">登録</button>
       </div>

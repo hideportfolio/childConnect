@@ -1,8 +1,10 @@
 <template>
-  <div class="card">
-    <h1>園児一覧</h1>
-    <div class="date">{{date.replace(/-/g,'/')}}</div>
-    <div>
+  <div>
+    <button class="back" @click="$router.push({ path: '/teachers/' })">戻る</button>
+    <div class="card">
+      <h1>園児一覧</h1>
+      <div class="date">{{date.replace(/-/g,'/')}}</div>
+      <div>
         <li v-for="(item,index) in attendances.items" :key="index" class="children-list">
           <div class="name-box">
             {{ item.user.lastname }} {{ item.user.firstname }}
@@ -13,8 +15,8 @@
             <button type=“button” class="detail" @click="$router.push({ path: '/teachers/attendance/detail', query: { user: item.userId, date: item.date }})" >詳細</button>
           </div>
         </li>
+      </div>
     </div>
-
   </div>
 </template>
 
