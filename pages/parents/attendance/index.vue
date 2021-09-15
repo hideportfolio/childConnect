@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="card">
-      <h1>出席登録</h1>
+      <h1>出欠登録</h1>
       <div class="date">{{ todayData.replace('-','/') }}</div>
       <p class="attP">
         <input name="attend" type="radio" v-model="attendance" value="ATTEND" id="attend">
@@ -108,7 +108,8 @@ input[type=radio]{
   line-height: 42px;
 
   background-color: white;
-  width: 120px;
+  width: 45%;
+  max-width: 240px;
   height: 80px;
 
   border: 3px solid #6CED9C;
@@ -131,7 +132,8 @@ input[type=radio]{
   line-height: 80px;
 
   background-color: white;
-  width: 120px;
+  width: 45%;
+  max-width: 240px;
   height: 80px;
 
   border: 3px solid #FF7676;
