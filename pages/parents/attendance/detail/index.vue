@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>This is attendance page.</p>
-    <p>{{ attendance }}</p>
+    <span>{{ attendance.date }}</span><span>{{ attendance_dictionary[attendance.attendance] }}</span><br>
     <input v-model="replay" placeholder="返信">
     <button @click="postReplay()">Replay</button>
   </div>
@@ -14,15 +14,18 @@ import { getAttendance } from '~/graphql/queries'
 import { createThread } from '~/graphql/mutations'
 
 export default {
-  middleware: 'auth',
   data () {
     return {
       attendance: {},
-      replay: ''
+      replay: '',
+      attendance_dictionary: {
+        ATTEND: '出席',
+        ABSENT: '欠席'
+      }
     }
   },
-  async created () {
-    await this.getAttendance()
+  created () {
+    this.getAttendance()
   },
   methods: {
     async postReplay () {
@@ -31,8 +34,7 @@ export default {
         input: {
           attendanceId: this.attendance.id,
           userId: auth.username,
-          contents: this.replay,
-          timestamp: Math.floor(Date.now() / 1000)
+          contents: this.replay
         }
       }))
       console.log(res)

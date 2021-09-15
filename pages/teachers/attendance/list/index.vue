@@ -1,9 +1,9 @@
 <template>
   <div class="card">
     <h1>園児一覧</h1>
-    <div class="date">{{date}}</div>
+    <div class="date">{{date.replace(/-/g,'/')}}</div>
     <div>
-        <li v-for="(item,index) in attendances.items" :key="index" class="chlderen-list">
+        <li v-for="(item,index) in attendances.items" :key="index" class="children-list">
           <div class="name-box">
             {{ item.user.lastname }} {{ item.user.firstname }}
           </div>
@@ -21,7 +21,9 @@
 <script>
 import API, { graphqlOperation } from '@aws-amplify/api'
 import { attendancesByDate } from '~/graphql/queries'
+
 export default {
+  middleware: 'auth',
   data () {
     return {
       attendances: [],
@@ -54,7 +56,6 @@ export default {
 </script>
 
 <style>
-
 .date {
   /* 2021/9/17 */
   color: #825959;
@@ -70,7 +71,7 @@ export default {
   margin: 15px auto 5px;
 }
 
-.chlderen-list {
+.children-list {
   color: #825959;
   width: 90%;
   max-width: 300px;

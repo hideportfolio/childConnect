@@ -2,7 +2,7 @@
   <div>
     <div class="card">
       <h1>出席登録</h1>
-      <div class="date">{{ todayData }}</div>
+      <div class="date">{{ todayData.replace('-','/') }}</div>
       <p class="attP">
         <input name="attend" type="radio" v-model="attendance" value="ATTEND" id="attend">
         <label for="attend" class="attend">出席</label>
@@ -14,7 +14,7 @@
         <div class="text">
           <label for="text" class="text-label">メッセージ（任意）</label>
         </div>
-        <textarea name="text" rows="5" cols="10" v-model="remarks">ここに記入してください</textarea>
+        <textarea name="text" v-model="remarks">ここに記入してください</textarea>
       </p>
 
       <div class="submit-box">
@@ -73,6 +73,7 @@ export default {
         }))
         console.log(remarksRes)
       }
+      this.$router.push({ path: '/parents/attendance/list' })
     }
   }
 }
@@ -107,14 +108,14 @@ input[type=radio]{
   line-height: 42px;
 
   background-color: white;
-  width: 116px;
-  height: 81px;
+  width: 120px;
+  height: 80px;
 
   border: 3px solid #6CED9C;
   box-sizing: border-box;
   border-radius: 10px;
   margin: 10px;
-  line-height: 81px;
+  line-height: 80px;
 
   text-align: center;
 }
@@ -127,11 +128,11 @@ input[type=radio]{
   color: #FF7676;
 
   font-size: 36px;
-  line-height: 81px;
+  line-height: 80px;
 
   background-color: white;
-  width: 112px;
-  height: 82px;
+  width: 120px;
+  height: 80px;
 
   border: 3px solid #FF7676;
   box-sizing: border-box;
@@ -170,25 +171,5 @@ input[type=radio]:checked + label.absence {
 .submit-box {
   display:flex;
   justify-content:center;
-}
-
-.submit {
-  font-size: 24px;
-  line-height: 28px;
-
-  margin: 20px auto;
-
-  border: 1px solid #825959;
-}
-
-textarea {
-  width: 251px;
-  height: 83px;
-  background: #FFFFFF;
-  border: 1px solid #825959;
-  box-sizing: border-box;
-  border-radius: 6px;
-  margin: 0 auto;
-  resize: none;
 }
 </style>

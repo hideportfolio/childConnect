@@ -49,10 +49,10 @@
   .submit{
     background-color: #FFFFFF;
     color: #825959;
-    width: 240px;
-    height: 50px;
+    width: 260px;
+    height: 40px;
     text-align: center;
-    border: 2px #825959 solid;
+    border: 1px #825959 solid;
     border-radius: 30px;
   }
   .submit:hover{
@@ -78,4 +78,14 @@
     vertical-align: middle;
     margin: 1px 1px 4px 1px;
   }
+  textarea{
+  width: 270px;
+  height: 80px;
+  background: #FFFFFF;
+  border: 1px solid #825959;
+  box-sizing: border-box;
+  border-radius: 6px;
+  margin: 0 auto 15px auto;
+  resize: none;
+}
 </style>

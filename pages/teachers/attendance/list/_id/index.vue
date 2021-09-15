@@ -10,7 +10,7 @@ import API, { graphqlOperation } from '@aws-amplify/api'
 import { getUser, listAttendaces } from '~/graphql/queries'
 
 export default {
-
+  middleware: 'auth',
   data () {
     return {
       userProfile: undefined,
