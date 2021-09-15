@@ -1,5 +1,6 @@
 <template>
   <div>
+    <button class="back" @click="$router.push({ path: '/parents/' })">戻る</button>
     <div class="card">
       <h1>あなたのお子様の出欠一覧</h1>
       <li v-for="(attendance, index) in attendances.items" :key="index" class="children-list">
