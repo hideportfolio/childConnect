@@ -50,7 +50,8 @@
   .submit{
     background-color: #FFFFFF;
     color: #825959;
-    width: 260px;
+    width: 100%;
+    max-width: 500px;
     height: 40px;
     text-align: center;
     border: 1px #825959 solid;
@@ -65,7 +66,7 @@
   .back{
     background-color: #FFFFFF;
     color: #A1CAE2;
-    width: 70px;
+    width: 80px;
     height: 30px;
     text-align: center;
     border: 2px #FFFFFF solid;
@@ -82,7 +83,8 @@
   }
   /* 返信用textarea */
   textarea{
-  width: 270px;
+  width: 100%;
+  max-width: 500px;
   height: 80px;
   background: #FFFFFF;
   border: 1px solid #825959;
@@ -94,7 +96,7 @@
 /* 日付表示 */
 .date {
   color: #825959;
-  font-size: 18px;
+  font-size: 20px;
   line-height: 20px;
   width: 100px;
   height: 20px;
@@ -103,8 +105,8 @@
 /* 一覧表示(保護者側も) */
 .children-list {
   color: #825959;
-  width: 90%;
-  max-width: 300px;
+  width: 100%;
+  max-width: 500px;
   height: 40px;
   line-height: 40px;
 
@@ -113,13 +115,13 @@
   border-radius: 9px;
   list-style: none;
   margin: 10px auto;
-  padding: 0 5px;
+  padding: 0 5px 5px 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
 .name-box {
-  margin:0 0 1px auto;
+  margin:0 10px 0 3px;
 }
 .button-box {
   margin:0 0 0 auto;
@@ -129,6 +131,7 @@
   height: 30px;
   line-height: 30px;
   margin-top: 5px;
+  margin-right: 3px;
   color: #FFFFFF;
   background: #6CED9C;
   border: 3px solid #6CED9C;
@@ -141,6 +144,7 @@
   height: 30px;
   line-height: 30px;
   margin-top: 5px;
+  margin-right: 3px;
   color: #FFFFFF;
   background: #FF7676;
   border: 3px solid #FF7676;
