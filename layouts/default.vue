@@ -1,8 +1,6 @@
 <template>
   <div>
-    <header>
-      <div class="headerContents">出欠管理システム</div>
-    </header>
+    <BaseAppBar title="ちゃいこね" />
     <div class="MainContents">
       <Nuxt />
     </div>
