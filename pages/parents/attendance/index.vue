@@ -73,6 +73,7 @@ export default {
         }))
         console.log(remarksRes)
       }
+      this.$router.push({ path: '/parents/attendance/list' })
     }
   }
 }
