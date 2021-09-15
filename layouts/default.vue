@@ -119,7 +119,7 @@
   justify-content: space-evenly;
 }
 .name-box {
-  margin:0 0 0 auto;
+  margin:0 0 1px auto;
 }
 .button-box {
   margin:0 0 0 auto;
