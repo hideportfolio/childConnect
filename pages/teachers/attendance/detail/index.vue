@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button class="back">戻る</button>
+    <button class="back" @click="$router.push({ path: '/teachers/attendance/list' })">戻る</button>
     <div class="card">
       <h1>出欠の詳細</h1>
       <div class="date">{{ todayData }}</div>
@@ -11,14 +11,15 @@
         </span>
         <span class="name" v-if="attendance.user">{{attendance.user.lastname}} {{ attendance.user.firstname }}</span>
       </div>
-      <br>
       <button class="past-message" @click="$router.push({ path: '/teachers/attendance/detail', query: { user: item.userId, date: item.date }})">過去のメッセージ></button>
-      <p>最新メッセージ</p>
-      <div class="parent-message">
-        <p v-if="attendance.threads">{{ attendance.threads.items[0].contents }}</p>
+      <div class="message-container">
+        <span>最新メッセージ</span>
+        <div>
+          <p class="no-message" v-if="latestMessage==''">最新メッセージはありません。</p>
+          <p class="parent-message" v-if="latestMessage!=''">{{latestMessage}}</p>
+        </div>
       </div>
-      <br>
-      <p>返信</p>
+      <span>返信</span>
       <input class="rep" v-model="replay" placeholder="返信">
       <br>
       <button class="submit" @click="postReplay()">返信</button>
@@ -38,7 +39,8 @@ export default {
     return {
       attendance: {},
       replay: '',
-      date: ''
+      date: '',
+      latestMessage: ''
     }
   },
   computed: {
@@ -49,6 +51,7 @@ export default {
   },
   async created () {
     await this.getAttendance()
+    this.getLatestMessage()
   },
   methods: {
     async postReplay () {
@@ -70,6 +73,9 @@ export default {
         date: this.$route.query.date
       }))
       this.attendance = res.data.getAttendance
+    },
+    getLatestMessage () {
+      this.latestMessage = this.attendance.threads.items.length === 0 ? '' : this.attendance.threads.items[0].contents
     }
   }
 }
@@ -105,7 +111,7 @@ export default {
     background-color: #FF7676;
   }
   .past-message{
-    font-size: 14px;
+    font-size: 10px;
     border: none;
     outline: none;
     border-radius:5px;
@@ -114,23 +120,32 @@ export default {
     margin:0 0 0 auto;
     width: 135px;
   }
+  .no-message{
+    font-size: 14px;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin: 0 auto;
+    border-radius: 5px;
+  }
   .parent-message{
     font-size: 18px;
     padding: 10px;
-    margin-bottom: 10px;
-    text-align: center;
     margin: 0 auto;
     border: 1px solid #EFEFEF;
     background-color:#EFEFEF;
     border-radius: 5px;
+    width: 270px;
+  }
+  .message-container {
+    max-width: 300px;
+    margin: 0 auto;
   }
   .submit{
     font-size: 18px;
     text-align: center;
     margin: 0 auto;
   }
-  .card p{
-    font-size: 18px;
+  .card{
     color: #825959;
   }
   .rep{
