@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <h1>園児一覧</h1>
-    <div class="date">{{date}}</div>
+    <div class="date">{{date.replace(/-/g,'/')}}</div>
     <div>
         <li v-for="(item,index) in attendances.items" :key="index" class="children-list">
           <div class="name-box">
