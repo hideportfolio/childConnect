@@ -1,5 +1,4 @@
-# unisysInternship
-日本ユニシスインターンシップ用リポジトリ
+
 
 ## Build Setup
 
